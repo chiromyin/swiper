@@ -12,29 +12,23 @@ class FirstForm extends Component {
 
   state = {
     isModalVisible: false,
-    task:'',
-    date:''
+    task:"",
+    date:""
   };
-  toggleModal = () => {
-    this.setState({ isModalVisible: !this.state.isModalVisible });
+  addTask = () => {
+    this.setState({ isModalVisible: !this.state.isModalVisible})
   };
-  TextInput = (task) => {
-    this.setState({
-
-    })
+  saveTask = () => {
+    const {task,date} = this.state;
+    this.setState({ isModalVisible: !this.state.isModalVisible}, Alert.alert(task + "  " + date))
+    
   };
-  dateInput = (date) => {
-    this.setState({
-
-    })
-  }
-
   render(){
     return (
     <View style={{ flex: 1 }}>
       <View style={styles.container}>
-        <Text style={styles.text}>ToDoList</Text>
-        <Icon name="pluscircleo" size={35} color="#fff" onPress={this.toggleModal} />
+        <Text style={styles.text}>ToDoList</Text> 
+        <Icon name="pluscircleo" size={35} color="#fff" onPress={this.addTask} />
       </View>
       <Modal isVisible={this.state.isModalVisible} >
         <View>
@@ -44,7 +38,7 @@ class FirstForm extends Component {
             placeholderTextColor='#fff'
             underlineColorAndroid='#00FFFF'
             value={this.state.task}
-            onChangeText={(task) => this.setState({task})}
+            onChangeText = { task => this.setState({task})}
           />
           <TextInput
             style={{height: 70, fontSize:20, color:'#fff',marginBottom:20}}
@@ -52,13 +46,10 @@ class FirstForm extends Component {
             placeholderTextColor='#fff'
             underlineColorAndroid='#00FFFF'
             value={this.state.date}
-            onChangeText={(date) => this.setState({date})}
+            onChangeText = { date => this.setState({date})}
           />  
         </View>
-        <Button title="Add Task" onPress={this.toggleModal} />        
-        {/* <TouchableOpacity onPress={this.toggleModal}> 
-            <Text>Add Task</Text>
-        </TouchableOpacity> */}
+        <Button title="Add Task" onPress={this.saveTask}/>        
       </Modal>
     </View>
     );
@@ -75,10 +66,11 @@ const styles = StyleSheet.create({
   text:{
     fontSize:15,
     color:'#fff'
-  },
+  }, 
   btn:{
     justifyContent:'flex-end'
   }
 })
+
 export default FirstForm
 
